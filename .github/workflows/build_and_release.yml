@@ -81,7 +81,7 @@ jobs:
         run: rinf message
 
       - name: Install flutter_distributor
-        run: dart pub global activate flutter_distributor
+        run: flutter pub global activate flutter_distributor
       
       # -------------------------
       # Build
