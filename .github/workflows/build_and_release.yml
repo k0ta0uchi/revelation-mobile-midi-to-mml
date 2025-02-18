@@ -41,12 +41,11 @@ jobs:
         run: |
           echo "${{ secrets.PFX_BASE64 }}" > encoded_cert.txt
           certutil -decode encoded_cert.txt test_certificate.pfx
-        shell: pwsh
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
-        run: certutil -importpfx test_certificate.pfx
+        run: certutil -importpfx test_certificate.pfx NoUser
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
-        run: dart run msix:create --certificate-path test_certificate.pfx --certificate-password ""
+        run: dart run msix:create --certificate-path test_certificate.pfx --certificate-password "revelation"
