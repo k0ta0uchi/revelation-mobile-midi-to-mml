@@ -40,7 +40,7 @@ jobs:
       - name: Decode and save PFX certificate (Windows)
         run: |
           echo "${{ secrets.PFX_BASE64 }}" > encoded_cert.txt
-          certutil -decode encoded_cert.txt test_certificate.pfx
+          Start-Process PowerShell -ArgumentList "certutil -importpfx test_certificate.pfx -p 'revelation'" -Verb RunAs
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
