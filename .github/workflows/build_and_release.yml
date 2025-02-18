@@ -39,7 +39,7 @@ jobs:
       # ① GitHub Secrets から PFX を復元
       - name: Decode and save PFX certificate (Windows)
         run: |
-          echo $env:PFX_BASE64 > encoded_cert.txt
+          echo "${{ secrets.PFX_BASE64 }}" > encoded_cert.txt
           certutil -decode encoded_cert.txt test_certificate.pfx
         shell: pwsh
 
