@@ -41,4 +41,4 @@ jobs:
       # -------------------------
       
       - name: Package windows
-        run: dart run msix:create
+        run: dart run msix:create --no-sign
