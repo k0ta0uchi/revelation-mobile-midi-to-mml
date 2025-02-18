@@ -37,8 +37,11 @@ jobs:
         uses: microsoft/setup-msstore-cli@v1
     
       # ① GitHub Secrets から PFX を復元
-      - name: Restore test_certificate.pfx
-        run: echo "${{ secrets.PFX_BASE64 }}" | base64 -d > test_certificate.pfx
+      - name: Decode and save PFX certificate (Windows)
+        run: |
+          echo $env:CERTIFICATE_BASE64 > encoded_cert.txt
+          certutil -decode encoded_cert.txt test_certificate.pfx
+        shell: pwsh
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
