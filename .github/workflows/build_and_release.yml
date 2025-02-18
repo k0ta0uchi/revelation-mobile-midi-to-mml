@@ -49,7 +49,7 @@ jobs:
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
-        run: certutil -importpfx test_certificate.pfx -p revelation
+        run: certutil -f -importpfx test_certificate.pfx -p revelation
         # run: |
         #   powershell -ExecutionPolicy Bypass -File .github/scripts/import_cert.ps1
 
@@ -57,7 +57,7 @@ jobs:
       - name: Create MSIX package
         run: |
           powershell -ExecutionPolicy Bypass -File "$env:GITHUB_WORKSPACE/.github/scripts/import_cert.ps1"
-          
+
       - name: List files in the output directory
         run: |
           dir ./
