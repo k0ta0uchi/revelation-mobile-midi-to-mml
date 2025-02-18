@@ -1,14 +1,15 @@
-$ErrorActionPreference = "Stop"  # エラー時に即終了
 trap {
-    Write-Host "❌ エラーが発生しました: $_"
+    Write-Host "❌ エラー発生: $_"
     exit 1
 }
 
-Write-Host "🔹 証明書をインポート開始..."
-
 Start-Process -FilePath "certutil.exe" `
-  -ArgumentList "-importpfx", "test_certificate.pfx", "-p", "revelation" `
+  -ArgumentList "-importpfx test_certificate.pfx -p revelation" `
   -Verb RunAs `
+  -RedirectStandardOutput "C:\cert_import_output.log" `
+  -RedirectStandardError "C:\cert_import_error.log" `
   -Wait
 
-Write-Host "✅ 証明書インポート完了！"
+# ログを表示（GitHub Actions のログに出力）
+Get-Content "C:\cert_import_output.log"
+Get-Content "C:\cert_import_error.log"
