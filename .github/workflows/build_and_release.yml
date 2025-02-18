@@ -55,6 +55,4 @@ jobs:
 
       - name: List files in the output directory
         run: |
-          dir ./dist/
-          dir ./build/
-          dir ./output/
+          dir ./
