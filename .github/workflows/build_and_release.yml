@@ -48,16 +48,12 @@ jobs:
       # ② PFX を Windows にインストール
       - name: Install signing certificate
         run: |
-          Start-Process -FilePath "PowerShell.exe" -ArgumentList "-NoExit", "-Command", "certutil -importpfx test_certificate.pfx -p 'revelation'" -Verb RunAs -RedirectStandardOutput "C:\output.log" -RedirectStandardError "C:\error.log" -Wait
-          cat C:\output.log
-          cat C:\error.log
+          powershell -ExecutionPolicy Bypass -File .github/scripts/import_cert.ps1
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
         run: |
-          Start-Process -FilePath "PowerShell.exe" -ArgumentList "-NoExit", "-Command", "dart run msix:create --certificate-path test_certificate.pfx --certificate-password 'revelation'" -Verb RunAs -RedirectStandardOutput "C:\output.log" -RedirectStandardError "C:\error.log" -Wait
-          cat C:\output.log
-          cat C:\error.log
+          powershell -ExecutionPolicy Bypass -File .github/scripts/create_msix.ps1
 
 
       - name: List files in the output directory
