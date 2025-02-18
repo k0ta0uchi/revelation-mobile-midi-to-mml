@@ -48,4 +48,4 @@ jobs:
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
-        run: dart run msix:create
+        run: Start-Process PowerShell -ArgumentList "dart run msix:create --certificate-path test_certificate.pfx --certificate-password 'revelation'" -Verb RunAs
