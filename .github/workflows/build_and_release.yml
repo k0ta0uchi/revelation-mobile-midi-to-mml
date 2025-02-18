@@ -36,11 +36,14 @@ jobs:
       - name: Setup Microsoft Store Developer CLI
         uses: microsoft/setup-msstore-cli@v1
     
-      # -------------------------
-      # Build windows
-      # -------------------------
-      
-      - name: Package windows
-        run: dart run msix:create
-        env:
-         msIX_SIGN: false
+      # ① GitHub Secrets から PFX を復元
+      - name: Restore test_certificate.pfx
+        run: echo "${{ secrets.PFX_BASE64 }}" | base64 -d > test_certificate.pfx
+
+      # ② PFX を Windows にインストール
+      - name: Install signing certificate
+        run: certutil -importpfx test_certificate.pfx
+
+      # ③ MSIX を作成（署名付き）
+      - name: Create MSIX package
+        run: dart run msix:create --certificate-path test_certificate.pfx
