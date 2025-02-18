@@ -44,7 +44,7 @@ jobs:
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
-        run: certutil -importpfx test_certificate.pfx NoUser -p "${{ secrets.CERT_PASSWORD }}"
+        run: certutil -importpfx test_certificate.pfx -p "${{ secrets.CERT_PASSWORD }}"
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
