@@ -108,14 +108,8 @@ jobs:
       # -------------------------
       
       - name: Package windows
-        run: msstore package
+        run: dart run msix:create
 
-      # -------------------------
-      # Publish windows
-      # -------------------------
-      
-      - name: Create microsoft store submission
-        run: msstore publish
 
   github-release:
     runs-on: windows-latest
