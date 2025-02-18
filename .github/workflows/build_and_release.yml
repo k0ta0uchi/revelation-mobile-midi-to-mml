@@ -40,12 +40,12 @@ jobs:
       - name: Decode and save PFX certificate (Windows)
         run: |
           echo "${{ secrets.PFX_BASE64 }}" > encoded_cert.txt
-          Start-Process PowerShell -ArgumentList "certutil -importpfx test_certificate.pfx -p 'revelation'" -Verb RunAs
+          certutil -decode encoded_cert.txt test_certificate.pfx
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
-        run: certutil -importpfx test_certificate.pfx -p "revelation"
+        run: Start-Process PowerShell -ArgumentList "certutil -importpfx test_certificate.pfx -p 'revelation'" -Verb RunAs
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
-        run: dart run msix:create --certificate-path test_certificate.pfx --certificate-password "revelation"
+        run: dart run msix:create --certificate-path test_certificate.pfx --certificate-password "reve"
