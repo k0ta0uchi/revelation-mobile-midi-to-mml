@@ -55,7 +55,7 @@ jobs:
 
       # ③ MSIX を作成（署名付き）
       - name: Create MSIX package
-        run: dart run msix:create --certificate-path ".\test_certificate.pfx" --certificate-password "revelation"
+        run: dart run msix:create --certificate-path ".\test_certificate.pfx" --certificate-password "revelation" --install-certificate
       # run: |
       # powershell -ExecutionPolicy Bypass -File "$env:GITHUB_WORKSPACE/.github/scripts/import_cert.ps1"
 
