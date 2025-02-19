@@ -49,7 +49,7 @@ jobs:
 
       # ② PFX を Windows にインストール
       - name: Install signing certificate
-        run: certutil -f -importpfx test_certificate.pfx -p revelation
+        run: certutil -f -p "revelation" -importpfx My test_certificate.pfx
         # run: |
         #   powershell -ExecutionPolicy Bypass -File .github/scripts/import_cert.ps1
 
